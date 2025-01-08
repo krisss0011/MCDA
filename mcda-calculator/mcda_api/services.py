@@ -88,7 +88,6 @@ def prepare_fuzzy_dataset(companies_data, criteria_data):
                 raw_value = 0
             cleaned_value = clean_value(raw_value)
             
-            # Create triangular fuzzy number
             lower = cleaned_value * 0.9
             middle = cleaned_value
             upper = cleaned_value * 1.1
@@ -138,7 +137,6 @@ def topsis_calculation(weights, companies_data, criterion_type):
     dataset = prepare_dataset(companies_data, criteria_data)
     normalized_weights = np.array(weights) / np.sum(weights)
     
-    # Extract just the type values (-1 or 1) for the algorithm
     criterion_types_list = [ct['type'] for ct in criterion_type]
 
     scores = topsis_method(dataset, normalized_weights, criterion_types_list, graph=False, verbose=False)
@@ -160,26 +158,21 @@ def fuzzy_topsis_calculation(weights, companies_data, criterion_type):
     Calculate the MCDA using the Fuzzy TOPSIS method
     """
     try:
-        # Fetch and validate criteria data
         criteria_data = fetch_default_criteria()
         if not criteria_data:
             raise ValueError("Failed to fetch criteria data")
         
-        # Extract criterion types as a list of 1 and -1
         criterion_types_list = [ct['type'] for ct in criterion_type]
         
-        # Prepare fuzzy dataset
         dataset = prepare_fuzzy_dataset(companies_data, criteria_data)
         logging.debug(f"Fuzzy dataset prepared with shape: {len(dataset)}x{len(dataset[0])}")
 
-        # Prepare fuzzy weights
         normalized_weights = np.array(weights) / np.sum(weights)
         fuzzy_weights = []
         for weight in normalized_weights:
             fuzzy_weights.append((weight * 0.95, weight, weight * 1.05))
         fuzzy_weights = np.array(fuzzy_weights, dtype=object)
 
-        # Calculate Fuzzy TOPSIS scores
         fuzzy_topsis_scores = fuzzy_topsis_method(
             dataset=dataset,
             weights=fuzzy_weights,
@@ -187,7 +180,6 @@ def fuzzy_topsis_calculation(weights, companies_data, criterion_type):
             graph=False
         )
 
-        # Prepare rankings
         ranked_companies = []
         for idx, (company, score) in enumerate(
             sorted(
@@ -198,7 +190,6 @@ def fuzzy_topsis_calculation(weights, companies_data, criterion_type):
         ):
             ranked_companies.append((company['name'], float(score)))
 
-        # Prepare criteria info
         criteria_info = []
         for criterion, weight in zip(criteria_data, weights):
             criteria_info.append((criterion['name'], weight))
@@ -224,7 +215,6 @@ def wsm_calculation(weights, companies_data, criterion_type):
         normalized_weights = np.array(weights) / np.sum(weights)
         lambda_value = 0.5
         
-        # Extract just the type values (-1 or 1) for the algorithm
         criterion_types_list = [ct['type'] for ct in criterion_type]
         
         wsm, wpm, waspas_scores = waspas_method(

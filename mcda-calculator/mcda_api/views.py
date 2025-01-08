@@ -80,7 +80,6 @@ class MCDAView(APIView):
         
         if model:
             truncate_table(model)
-            # model.objects.all().delete()
 
             if model == AhpResult:
                 weights_json = ','.join(map(str, weights))
@@ -120,48 +119,13 @@ class MCDAView(APIView):
         criteria_weights_str = ','.join(map(str, weights))
         criteria_types_str = ','.join([f"{ct['field']}:{ct['type']}" for ct in criterion_type]) if criterion_type else ""
 
-        # Leave this for now as it is ... rapid growing of id's because of the double insert / tried with truncate_table but it didn't work (only one method was saved in the db)
         CachedResults.objects.filter(method=method).delete()
-        # reset_auto_increment(CachedResults)
-        # truncate_table(CachedResults) 
 
         CachedResults.objects.create(
             method=method,
             criteria_weights=criteria_weights_str + (f", types: {criteria_types_str}" if criteria_types_str else ""),
             result_data=result
         )
-
-    # ONLY AHP IS WORKING FOR POST REQUESTS
-    # def post(self, request):
-    #     method = request.query_params.get('method')
-    #     weights_string = request.data.get('weights')
-
-    #     if not method:
-    #         return Response({"error": "Method parameter is required"}, status=status.HTTP_400_BAD_REQUEST)
-        
-    #     if method not in ['all', 'ahp', 'topsis', 'fuzzy_topsis', 'waspas']:
-    #         return Response({"error": "Unsupported MCDM method"}, status=status.HTTP_400_BAD_REQUEST)
-
-    #     if not weights_string:
-    #         return Response({"error": "Weights parameter is required"}, status=status.HTTP_400_BAD_REQUEST)
-
-    #     try:
-    #         weights = list(map(float, weights_string.split(',')))
-    #     except ValueError:
-    #         return Response({"error": "Invalid weights format"}, status=status.HTTP_400_BAD_REQUEST)
-
-    #     companies_data = fetch_company_data()
-    #     if companies_data is None:
-    #         return Response({"error": "Failed to fetch company data"}, status=status.HTTP_400_BAD_REQUEST)
-
-    #     try:
-    #         result = calculate_mcdm(method, weights, companies_data)
-    #         if result is None:
-    #             return Response({"error": "Error in calculating MCDM, result was None"}, status=status.HTTP_400_BAD_REQUEST)
-    #         return Response(result)
-    #     except ValueError as e:
-    #         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
 
 class CachedResultsViewSet(viewsets.ModelViewSet):
     """
