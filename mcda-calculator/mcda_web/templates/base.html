@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    {% load static %}
+    {% load bootstrap5 %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+    
+    {% bootstrap_css %}
+</head>
+<body>
+    {% include 'navbar.html' %}
+    {% block content %}
+    {% endblock %}
+    <hr>
+    {% include 'footer.html' %}
+
+    
+    <script src="{% static 'js/main.js' %}"></script>
+    {% bootstrap_javascript %}
+    
+</body>
+</html>

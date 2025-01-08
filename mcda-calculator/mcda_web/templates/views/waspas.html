@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Waspas Results{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<main class="container mt-3">
+    <h1 class="text-center">WSM Results</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <h5 id="analysisDate" class="text-secondary">Analysis Date:</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Criteria and Weights</h4>
+            <table id="criteriaTable" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Criteria</th>
+                        <th scope="col">Weight</th>
+                    </tr>
+                </thead>
+                <tbody id="criteriaList">
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h4>Top Ranked Companies</h4>
+            <table id="companyTable" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Company</th>
+                        <th scope="col">Score</th>
+                    </tr>
+                </thead>
+                <tbody id="companyList">
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<script src="{% static 'js/wsm.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', fetchWsmResults);
+</script>
+
+{% endblock %}
