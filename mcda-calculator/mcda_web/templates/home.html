@@ -3,7 +3,38 @@
 {% block title %}MCDA{% endblock %}
 
 {% block content %}
-<h1>Welcome to My Site</h1>
-<p>This is the homepage. Feel free to explore our content!</p>
+<div class="container my-3">
+    <h1 class="text-center">Dobrodošli na moji strani</h1>
+    <h4 class="text-muted text-center">--- Modeliranje večkriterijskih odločitvenih procesov ---</h4>
 
+    <hr class="my-4">
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h6 class="card-title text-primary">Analitični hierarhični proces (AHP)</h6>
+            <p class="card-text">Analitični hierarhični proces (AHP) je metoda za odločanje, ki jo je razvil Thomas Saaty za določanje prioritet in izbiro med alternativami, ko je vključenih več kriterijev. Težavo razdeli v hierarhijo ciljev, kriterijev in alternativ, nato pa z uporabo primerjalnih ocen dodeli uteži posameznim elementom glede na njihovo relativno pomembnost. Te primerjalne ocene se sintetizirajo za razvrstitev alternativ, doslednost ocen pa se preverja. AHP je pogosto uporabljen na področjih, kot so razporejanje virov, določanje prioritet projektov in izbira dobaviteljev, zaradi svoje sposobnosti obravnave tako kvalitativnih kot kvantitativnih dejavnikov.</p>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <h6 class="card-title text-primary">Fuzzy TOPSIS</h6>
+            <p class="card-text">Fuzzy TOPSIS je razširitev metode TOPSIS, ki vključuje fuzzy logiko za obravnavo negotovosti in nejasnosti pri odločanju. Uporablja fuzzy številke za predstavitev uteži kriterijev in ocen alternativ, kar jo naredi primerno za probleme, kjer so ocene subjektivne ali podatki nepopolni. Metoda sledi istemu principu kot TOPSIS, izračunava razdaljo do idealne in negativno idealne rešitve, vendar deluje v okviru fuzzy množic za večjo natančnost odločitev.</p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h6 class="card-title text-primary">Metoda TOPSIS</h6>
+            <p class="card-text">TOPSIS je metoda večkriterijskega odločanja, ki razvršča alternative na podlagi njihove bližine idealni rešitvi. Vsako alternativo oceni z izračunom njene razdalje od idealne (najboljše) in negativno idealne (najslabše) rešitve. Alternativa, ki je najbližja idealni in najbolj oddaljena od negativne idealne rešitve, je izbrana kot najboljša možnost. TOPSIS je pogosto uporabljen zaradi svoje enostavnosti in sposobnosti obravnave tako kvantitativnih kot kvalitativnih podatkov.</p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h6 class="card-title text-primary">Model tehtanih vsot (WSM)</h6>
+            <p class="card-text">Model tehtanih vsot (WSM) je ena najpreprostejših metod večkriterijskega odločanja. Dodeli uteži vsakemu kriteriju in izračuna skupni rezultat za vsako alternativo s seštevanjem tehtanih ocen. Alternativa z najvišjim skupnim rezultatom je izbrana kot najboljša možnost. WSM je enostaven za uporabo, vendar je najbolj primeren za probleme s kriteriji, ki so merjeni v istih enotah, saj predpostavlja linearno razmerje v preferencah.</p>
+        </div>
+    </div>
+</div>
 {% endblock %}
